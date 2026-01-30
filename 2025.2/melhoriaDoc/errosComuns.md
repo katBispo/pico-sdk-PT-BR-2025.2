@@ -23,7 +23,7 @@ O foco é apoiar principalmente **alunos iniciantes**, que costumam enfrentar di
 
 ###  Erro 1: `cmake: command not found`
 
-![alt text](image.png)
+![alt text](images/image.png)
 
 **Descrição**
 Ao tentar compilar o projeto, o terminal informa que o comando `cmake` não foi reconhecido.
@@ -42,7 +42,7 @@ O CMake não está instalado ou não foi adicionado corretamente às variáveis 
 
   * Instale o CMake
 
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 
   * Marque a opção **“Add CMake to system PATH”** durante a instalação
 * Reinicie o terminal ou o computador após a instalação
@@ -50,7 +50,7 @@ O CMake não está instalado ou não foi adicionado corretamente às variáveis 
 ---
 
 ###  Erro 2: `PICO_SDK_PATH not set`
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 
 **Descrição**
 O CMake retorna erro informando que a variável `PICO_SDK_PATH` não está definida.
