@@ -1,0 +1,41 @@
+= Conectando um LCD 16x2 via TTL
+
+Este código de exemplo mostra como interligar o Raspberry Pi Pico a um dos displays de caracteres 16x2 mais comuns. Devido ao grande número de pinos utilizados por esses displays, eles normalmente são usados com drivers extras ou backpacks. Neste exemplo, utilizamos um backpack de display LCD da Adafruit, que suporta comunicação via USB ou TTL. Também é utilizado um display monocromático com backlight RGB, mas o backpack é compatível com displays com backlight monocromático também. Há outro exemplo que utiliza I2C para controlar um display 16x2.
+
+O backpack processa um conjunto de comandos que estão documentados https://learn.adafruit.com/usb-plus-serial-backpack/command-reference[aqui
+] e que são precedidos pelo byte “especial” 0xFE. O backpack realiza a conversão de caracteres ASCII e ainda suporta a criação de caracteres personalizados. Neste exemplo, usamos a UART primária do Pico (uart0) para ler caracteres do computador e enviá-los pela outra UART (uart1) para imprimi-los no LCD. Também definimos uma sequência especial de inicialização e variamos a cor do backlight do display.
+
+NOTA: Você pode alterar para onde a saída do stdio é enviada (USB do Pico, uart0 ou ambos) usando diretivas do CMake. O arquivo CMakeLists.txt mostra como habilitar ambos.
+
+== Informações de cabeamento
+
+A conexão do backpack ao Pico requer 3 jumpers para ligar VCC (3.3V), GND e TX. O exemplo aqui utiliza ambas as UARTs do Pico: uma (uart0) para stdio e a outra (uart1) para comunicação com o backpack. O pino 8 é usado como pino TX. A alimentação é fornecida pelo pino de 3.3V. Para conectar o backpack ao display, é prática comum soldá-lo na parte traseira do display ou, durante a fase de prototipagem, usar as mesmas trilhas paralelas em uma protoboard.
+
+NOTA: Embora este display funcione em 3.3V, ele ficará relativamente escuro. Utilizar uma fonte de 5V o deixará mais brilhante.
+
+[[lcd_uart_wiring]]
+[pdfwidth=75%]
+.Diagrama de ligação do LCD com backpack TTL.
+image::lcd_uart_bb.png[]
+
+== Lista de arquivos
+
+CMakeLists.txt:: Arquivo CMake para incorporar o exemplo à árvore de build de exemplos.
+lcd_uart.c:: O código de exemplo.
+
+== Lista de materiais
+
+.Uma lista dos materiais necessários para o exemplo
+[[lcd_uart-bom-table]]
+[cols=3]
+|===
+| Item | Quantidade | Detalhes
+| Protoboard | 1 | peça genérica
+| Raspberry Pi Pico | 1 | https://www.raspberrypi.com/products/raspberry-pi-pico/
+
+| Display LCD RGB 16x2 3.3V | 1 | peça genérica, https://www.adafruit.com/product/398[disponível
+na Adafruit]
+| Backpack LCD 16x2 | 1 | https://www.adafruit.com/product/781[da
+Adafruit]
+| Jumpers macho–macho | 3 | peça genérica
+|===
